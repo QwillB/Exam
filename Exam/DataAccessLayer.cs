@@ -5,7 +5,7 @@ namespace Exam
 {
     public static class DataAccessLayer
     {
-         
+
         public static string ServerName { get; set; } = @"localhost";
 
         public static string DBName { get; set; } = "Exam";
@@ -169,7 +169,6 @@ namespace Exam
             connection.Open();//установка соединения с БД
             string query = $"INSERT INTO ExamOrder(UserID, OrderStatus, OrderDate, OrderDeliveryDate, OrderPickupPoint, OrderPickupCode) VALUES(@userID, @orderStatus, @orderDate, @orderDeliveryDate, @orderPickupPoint, @orderPickupCode);";
             SqlCommand sqlCommand = new(query, connection);//получение данных из БД
-            //sqlCommand.Parameters.AddWithValue("@orderID", orderID);
             sqlCommand.Parameters.AddWithValue("@userID", userID != 0 ? userID : DBNull.Value);
             sqlCommand.Parameters.AddWithValue("@orderStatus", orderStatus);
             sqlCommand.Parameters.AddWithValue("@orderDate", orderDate);
@@ -185,7 +184,6 @@ namespace Exam
             connection.Open();//установка соединения с БД
             string query = $"INSERT INTO ExamOrderProduct VALUES(@orderID, @productArticleNumber, @amount);";
             SqlCommand sqlCommand = new(query, connection);//получение данных из БД
-            //sqlCommand.Parameters.AddWithValue("@orderID", orderID);
             sqlCommand.Parameters.AddWithValue("@orderID", orderID);
             sqlCommand.Parameters.AddWithValue("@productArticleNumber", productArticleNumber);
             sqlCommand.Parameters.AddWithValue("@amount", amount);

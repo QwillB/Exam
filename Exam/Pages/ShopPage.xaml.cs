@@ -84,7 +84,7 @@ namespace Exam.Pages
                 searchTextBoxIsFill = false;//строка поиска не заполнена текстом для поиска
             }
         }
-        
+
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)//обработчик события, срабатывает, когда мы на нее нажали
         {
             if (searchTextBoxIsFill == false)//если строка поиска не была заполнена текстом для поиска, то

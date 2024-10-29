@@ -42,88 +42,104 @@ namespace Exam.Pages
             PickupPointsComboBox.ItemsSource = examPickupPoints;
         }
 
-        private void CreateOrderList()//метод для вывода товаров в корзине на странцу
+        private void CreateOrderList() // метод для вывода товаров в корзине на страницу
         {
             productsInOrderStackPanel.Children.Clear();
             int productsCount = examOrderList.Count;
-            for (int i = 0; i < productsCount; i++)//в цикле создаются отдельные элементы в которых хранятся данные о товарах в корзине
+            for (int i = 0; i < productsCount; i++) // создаем отдельные элементы с данными о товарах
             {
-                Border productBorder = new Border();
-                productBorder.Width = 600;
-                productBorder.Margin = new Thickness(80, 5, 0, 5);
-                productBorder.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFCC6600"));
-                productBorder.BorderThickness = new(3);
+                Border productBorder = new Border
+                {
+                    Width = 600,
+                    Margin = new Thickness(80, 5, 0, 5),
+                    BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFCC6600")),
+                    BorderThickness = new Thickness(3)
+                };
 
-                StackPanel productPanel = new StackPanel();
-                productPanel.Tag = i;
-                productPanel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFCC99"));
+                StackPanel productPanel = new StackPanel
+                {
+                    Tag = i, // Устанавливаем индекс в Tag для последующего удаления
+                    Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFCC99"))
+                };
 
-                Image productImage = new Image();
-                productImage.Source = new BitmapImage(new Uri(examOrderList[i].ProductPhoto));
-                productImage.Width = 200;
-                productImage.Height = 200;
+                Image productImage = new Image
+                {
+                    Source = new BitmapImage(new Uri(examOrderList[i].ProductPhoto)),
+                    Width = 200,
+                    Height = 200
+                };
                 productPanel.Children.Add(productImage);
 
-                StackPanel articleNumberPanel = new StackPanel();
-                articleNumberPanel.Orientation = Orientation.Horizontal;
-                Label articleNumberLabel = new Label();
-                articleNumberLabel.Content = "Артикул:";
-                articleNumberLabel.FontFamily = new FontFamily("Comic Sans MS");
-                Label articleDataLabel = new Label();
-                articleDataLabel.Content = examOrderList[i].ProductArticleNumber;
+                StackPanel articleNumberPanel = new StackPanel { Orientation = Orientation.Horizontal };
+                Label articleNumberLabel = new Label
+                {
+                    Content = "Артикул:",
+                    FontFamily = new FontFamily("Comic Sans MS")
+                };
+                Label articleDataLabel = new Label
+                {
+                    Content = examOrderList[i].ProductArticleNumber
+                };
                 articleNumberPanel.Children.Add(articleNumberLabel);
                 articleNumberPanel.Children.Add(articleDataLabel);
                 productPanel.Children.Add(articleNumberPanel);
 
-                Label nameDataLabel = new Label();
-                nameDataLabel.Content = examOrderList[i].ProductName;
+                Label nameDataLabel = new Label { Content = examOrderList[i].ProductName };
                 productPanel.Children.Add(nameDataLabel);
 
-                Label desciptionDataLabel = new Label();
-                desciptionDataLabel.Content = examOrderList[i].ProductDescription;
+                Label desciptionDataLabel = new Label { Content = examOrderList[i].ProductDescription };
                 productPanel.Children.Add(desciptionDataLabel);
 
-                StackPanel categoryPanel = new StackPanel();
-                categoryPanel.Orientation = Orientation.Horizontal;
-                Label categoryLabel = new Label();
-                categoryLabel.Content = "Категория товара:";
-                categoryLabel.FontFamily = new FontFamily("Comic Sans MS");
-                Label categoryDataLabel = new Label();
-                categoryDataLabel.Content = examOrderList[i].ProductCategory;
+                StackPanel categoryPanel = new StackPanel { Orientation = Orientation.Horizontal };
+                Label categoryLabel = new Label
+                {
+                    Content = "Категория товара:",
+                    FontFamily = new FontFamily("Comic Sans MS")
+                };
+                Label categoryDataLabel = new Label { Content = examOrderList[i].ProductCategory };
                 categoryPanel.Children.Add(categoryLabel);
                 categoryPanel.Children.Add(categoryDataLabel);
                 productPanel.Children.Add(categoryPanel);
 
-                StackPanel manufacturerPanel = new StackPanel();
-                manufacturerPanel.Orientation = Orientation.Horizontal;
-                Label manufacturerLabel = new Label();
-                manufacturerLabel.Content = "Производитель товара:";
-                manufacturerLabel.FontFamily = new FontFamily("Comic Sans MS");
-                Label manufacturerDataLabel = new Label();
-                manufacturerDataLabel.Content = examOrderList[i].ProductManufacturer;
+                StackPanel manufacturerPanel = new StackPanel { Orientation = Orientation.Horizontal };
+                Label manufacturerLabel = new Label
+                {
+                    Content = "Производитель товара:",
+                    FontFamily = new FontFamily("Comic Sans MS")
+                };
+                Label manufacturerDataLabel = new Label { Content = examOrderList[i].ProductManufacturer };
                 manufacturerPanel.Children.Add(manufacturerLabel);
                 manufacturerPanel.Children.Add(manufacturerDataLabel);
                 productPanel.Children.Add(manufacturerPanel);
 
-                DockPanel costDockPanel = new DockPanel();//DockPanel чтобы в будущем в этой строке метки со скидкой не смещались, а были по правому краю
-                Label costLabel = new Label();
-                costLabel.Content = "Цена товара:";
-                costLabel.FontFamily = new FontFamily("Comic Sans MS");
-                TextBlock costDataTextBlock = new TextBlock();//TextBlock для возможности задания свойства зачеркнутости текста
-                costDataTextBlock.Text = examOrderList[i].ProductCost.ToString();
-                Label discountLabel = new Label();
-                discountLabel.Content = $"Скидка:";
-                discountLabel.FontFamily = new FontFamily("Comic Sans MS");
-                discountLabel.FontSize = 12;
-                Label discountDataLabel = new Label();
-                discountDataLabel.FontSize = 12;
-                discountDataLabel.Content = examOrderList[i].ProductDiscountAmount;
+                DockPanel costDockPanel = new DockPanel();
+                Label costLabel = new Label
+                {
+                    Content = "Цена товара:",
+                    FontFamily = new FontFamily("Comic Sans MS")
+                };
+                TextBlock costDataTextBlock = new TextBlock
+                {
+                    Text = examOrderList[i].ProductCost.ToString()
+                };
+                Label discountLabel = new Label
+                {
+                    Content = "Скидка:",
+                    FontFamily = new FontFamily("Comic Sans MS"),
+                    FontSize = 12
+                };
+                Label discountDataLabel = new Label
+                {
+                    FontSize = 12,
+                    Content = examOrderList[i].ProductDiscountAmount
+                };
                 costDockPanel.Children.Add(costLabel);
                 costDockPanel.Children.Add(discountDataLabel);
-                DockPanel.SetDock(discountDataLabel, Dock.Right);//размещение по правому краю, чтобы не было смещения при изменении ширины других меток
+                DockPanel.SetDock(discountDataLabel, Dock.Right);
                 costDockPanel.Children.Add(discountLabel);
-                DockPanel.SetDock(discountLabel, Dock.Right);//размещение по правому краю, чтобы не было смещения при изменении ширины других меток
-                if (examOrderList[i].ProductDiscountAmount > 0)//если скидка на товар есть, цена зачеркивается и создается метка с новой ценой
+                DockPanel.SetDock(discountLabel, Dock.Right);
+
+                if (examOrderList[i].ProductDiscountAmount > 0)
                 {
                     costDataTextBlock.TextDecorations = TextDecorations.Strikethrough;
                     costDataTextBlock.VerticalAlignment = VerticalAlignment.Bottom;
@@ -135,54 +151,59 @@ namespace Exam.Pages
                 costDockPanel.Children.Add(costDataTextBlock);
                 productPanel.Children.Add(costDockPanel);
 
-                StackPanel productStatusPanel = new StackPanel();
-                productStatusPanel.Orientation = Orientation.Horizontal;
-                Label productStatusLabel = new Label();
-                productStatusLabel.Content = "Статус:";
-                productStatusLabel.FontFamily = new FontFamily("Comic Sans MS");
-                Label productStatusDataLabel = new Label();
-                productStatusDataLabel.Content = examOrderList[i].ProductStatus;
-                productStatusPanel.Children.Add(productStatusLabel);
-                productStatusPanel.Children.Add(productStatusDataLabel);
-                productPanel.Children.Add(productStatusPanel);
+                // Добавляем TextBox для изменения количества товара
+                StackPanel quantityPanel = new StackPanel { Orientation = Orientation.Horizontal };
+                Label quantityLabel = new Label
+                {
+                    Content = "Количество:",
+                    FontFamily = new FontFamily("Comic Sans MS")
+                };
+                TextBox quantityTextBox = new TextBox
+                {
+                    Width = 50,
+                    Text = examOrderList[i].ProductCountInOrder.ToString(), // Устанавливаем текущее количество
+                    Tag = i // Сохраняем индекс для обработки события
+                };
+                quantityTextBox.TextChanged += QuantityTextBox_TextChanged;
+                quantityPanel.Children.Add(quantityLabel);
+                quantityPanel.Children.Add(quantityTextBox);
+                productPanel.Children.Add(quantityPanel);
 
-                StackPanel productQuantityInStockPanel = new StackPanel();
-                productQuantityInStockPanel.Orientation = Orientation.Horizontal;
-                Label productQuantityInStockLabel = new Label();
-                productQuantityInStockLabel.Content = "Количество на складе:";
-                productQuantityInStockLabel.FontFamily = new FontFamily("Comic Sans MS");
-                Label productQuantityInStockDataLabel = new Label();
-                productQuantityInStockDataLabel.Content = examOrderList[i].ProductQuantityInStock;
-                productQuantityInStockPanel.Children.Add(productQuantityInStockLabel);
-                productQuantityInStockPanel.Children.Add(productQuantityInStockDataLabel);
-                productPanel.Children.Add(productQuantityInStockPanel);
-
-                DockPanel countPanel = new DockPanel();
-                CountControl countControl = new CountControl();
-                countControl.Tag = i;
-                countControl.HorizontalAlignment = HorizontalAlignment.Left;
-                countControl.Value = examOrderList[i].ProductCountInOrder;
-                countControl.MaxValue = examOrderList[i].ProductQuantityInStock;
-                countControl.countTextBox.Text = examOrderList[i].ProductCountInOrder.ToString();
-                countControl.ValueChanged += CountControl_ValueChanged;
-                Button deleteButton = new Button();
+                Button deleteButton = new Button
+                {
+                    Content = "Удалить",
+                    Tag = i // Присваиваем индекс в Tag для использования в DeleteButton_Click
+                };
                 deleteButton.Click += DeleteButton_Click;
-                Image deleteImage = new Image();
-                deleteButton.Width = 50;
-                deleteButton.HorizontalAlignment = HorizontalAlignment.Right;
-                deleteImage.Source = new BitmapImage(new Uri("pack://application:,,,/Images/delete.png"));
-                deleteButton.Content = deleteImage;
-                DockPanel.SetDock(deleteButton, Dock.Right);
-                countPanel.Children.Add(deleteButton);
-                countPanel.Children.Add(countControl);
-                productPanel.Children.Add(countPanel);
+                productPanel.Children.Add(deleteButton);
 
                 productBorder.Child = productPanel;
                 productsInOrderStackPanel.Children.Add(productBorder);
             }
-            UpdateProductsCount();
-            UpdateDiscount();
-            UpdateCost();
+        }
+
+        // Обработчик изменения количества товара
+        private void QuantityTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox quantityTextBox = sender as TextBox;
+            int productIndex = (int)quantityTextBox.Tag;
+
+            if (int.TryParse(quantityTextBox.Text, out int newQuantity) && newQuantity >= 0)
+            {
+                examOrderList[productIndex].ProductCountInOrder = newQuantity;
+
+                UpdateProductsCount();
+                UpdateCost();
+                UpdateDiscount();
+
+                // Удаляем товар, если количество стало 0
+                if (newQuantity == 0)
+                {
+                    productsInOrderStackPanel.Children.RemoveAt(productIndex);
+                    examOrderList.RemoveAt(productIndex);
+                    CreateOrderList(); // Перестраиваем список товаров
+                }
+            }
         }
 
         private void UpdateProductsCount()//Обновление количества товаров в корзине
@@ -224,15 +245,27 @@ namespace Exam.Pages
                 OrderCostLabel.Content = 0;
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)//удаление товара из корзины
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            Button deleteButton = sender as Button;
-            DockPanel countPanel = deleteButton.Parent as DockPanel;
-            StackPanel productPanel = countPanel.Parent as StackPanel;
-            StackPanel productsInOrderStackPanel = productPanel.Parent as StackPanel;
-            examOrderList.RemoveAt((int)productPanel.Tag);
-            productsInOrderStackPanel.Children.Remove(productPanel);
-            CreateOrderList();
+            try
+            {
+                // Убедимся, что отправитель события — это кнопка и у нее есть Tag
+                if (sender is Button deleteButton && deleteButton.Tag is int index && index >= 0 && index < examOrderList.Count)
+                {
+                    examOrderList.RemoveAt(index);
+
+                    // Обновление списка товаров на странице
+                    CreateOrderList();
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка: элемент не найден или индекс неверен.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Произошла ошибка при удалении товара: " + ex.Message);
+            }
         }
 
         private void CountControl_ValueChanged(object sender, RoutedEventArgs e)//изменение количества штук определенного товара в корзине

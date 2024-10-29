@@ -23,7 +23,7 @@ namespace Exam.Pages
         {
             InitializeComponent();
 
-            examCreatedOrdersList = CurrentUser.IsGuest? createdByGuestOrdersList : DataAccessLayer.GetExamOrderDataWithId(CurrentUser.UserID);
+            examCreatedOrdersList = CurrentUser.IsGuest ? createdByGuestOrdersList : DataAccessLayer.GetExamOrderDataWithId(CurrentUser.UserID);
             //если пользователь зашел как гость, то список заказов заполняется из createdByGuestOrdersList, до момента,
             //пока кто-либо не зайдет в авторизованный аккаунт или приложение не будет перезапущено, гостю следует сохранить талоны заказов в txt, чтобы не потерять свои заказы
         }

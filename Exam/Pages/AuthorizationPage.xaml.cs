@@ -1,6 +1,5 @@
 ﻿
 using Exam.Pages;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,7 +11,7 @@ namespace Exam
         public AuthorizationPage()
         {
             InitializeComponent();
-            
+
         }
 
         private void AuthorizeButton_Click(object sender, RoutedEventArgs e)//при нажатии на кнопку идет заполнение данных текущего пользователя, если такой зарегестрирован
@@ -45,7 +44,7 @@ namespace Exam
         private void CloseImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Window parentWindow = Window.GetWindow(this);
-            if (parentWindow != null) 
+            if (parentWindow != null)
             {
                 parentWindow.Close();
             }
